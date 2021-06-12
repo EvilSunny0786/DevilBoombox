@@ -14,7 +14,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
+#--------------------------------------------#
+poto = "https://telegra.ph/file/136d7cb7cf72f7e1266a0.jpg"
+#--------------------------------------------#
 import json
 import os
 from os import path
@@ -643,7 +645,7 @@ async def play(_, message: Message):
                     [InlineKeyboardButton(text="❌", callback_data="cls")],
                 ]
             )       
-            await lel.edit(toxxt,reply_markup=koyboard,disable_web_page_preview=True)
+            await lel.edit(photo=poto,toxxt,reply_markup=koyboard,disable_web_page_preview=True)
             # WHY PEOPLE ALWAYS LOVE PORN ?? (A point to think)
             return
             # Returning to pornhub

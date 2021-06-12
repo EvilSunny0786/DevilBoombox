@@ -641,8 +641,6 @@ async def play(_, message: Message):
                         InlineKeyboardButton("5️⃣", callback_data=f'plll 4|{query}|{user_id}'),
                     ],
                     [InlineKeyboardButton(text="❌", callback_data="cls")],
-                    ],
-                    [InlineKeyboardButton(text="♾️ Support Group ♾️", "t.me/CoffinXsupport")],
                 ]
             )       
             await lel.edit(file="https://telegra.ph/file/04e51987fc94aa1e13735.jpg",toxxt,reply_markup=koyboard,disable_web_page_preview=True)

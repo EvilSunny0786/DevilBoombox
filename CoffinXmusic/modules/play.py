@@ -1270,7 +1270,6 @@ async def lol_cb(b, cb):
                 request_by=message.from_user.mention,
                 chat_title=message.chat.title,
         )
-        
         os.remove("final.png")
 
 # Have u read all. If read RESPECT :-)

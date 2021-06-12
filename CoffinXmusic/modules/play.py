@@ -1241,7 +1241,7 @@ async def lol_cb(b, cb):
         await cb.message.delete()
         await b.send_photo(chat_id,
             photo="final.png",
-            caption=f"**🏷️Song: [{title}]({url})**\n⏱️Duration: {duration}\n💡Status: `queued`\n\n **At Position** #{position}!"",
+            caption=f"**🏷️Song: [{title}]({url})**\n⏱️Duration: {duration}\n💡Status: `queued`\n\n **At Position** #{position}!",
             reply_markup=keyboard,
         )
         os.remove("final.png")

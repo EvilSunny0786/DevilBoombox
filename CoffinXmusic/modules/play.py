@@ -15,8 +15,6 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #--------------------------------------------#
-poto = "https://telegra.ph/file/136d7cb7cf72f7e1266a0.jpg"
-#--------------------------------------------#
 import json
 import os
 from os import path

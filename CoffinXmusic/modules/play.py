@@ -1263,13 +1263,9 @@ async def lol_cb(b, cb):
         await b.send_photo(chat_id,
             photo="final.png",
             reply_markup=keyboard,
-            caption=f"**𝘾𝙐𝙍𝙍𝙀𝙉𝙏𝙇𝙔 𝙋𝙇𝘼𝙔𝙄𝙉𝙂**\n\n**🏷️Song: [{song_name}]({url})**\n⏱️Duration: {song_duration}\n💡Status: `Playing🎵`\nRequested By {request_by}\nPlaying In: {chat_title}**".format(
-                song_name=title,
-                url=url,   
-                song_duration=duration,
-                request_by=message.from_user.mention,
-                chat_title=message.chat.title,
+            caption=f"**🏷️Song: [{title}]({url})**\n⏱️Duration: {duration}\n💡Status: `Playing`\n Requested by: {message.from_user.mention}\nplaying in: {message.chat.title}",
         )
+        
         os.remove("final.png")
 
 # Have u read all. If read RESPECT :-)

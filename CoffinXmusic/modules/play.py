@@ -849,7 +849,7 @@ async def ytplay(_, message: Message):
         qeue.append(appendable)
         await message.reply_photo(
             photo="final.png",
-            caption=f"**🏷️Song: [{title}]({url})**\n⏱️Duration: {duration}\n💡Status: `queued`\n\n **At Position** #{position}!"",
+            caption=f"**🏷️Song: [{title}]({url})**\n⏱️Duration: {duration}\n💡Status: `queued`\n\n **At Position** #{position}!",
             reply_markup=keyboard,
         )
         os.remove("final.png")

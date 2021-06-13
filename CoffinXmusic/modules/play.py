@@ -36,7 +36,8 @@ from youtube_search import YoutubeSearch
 from CoffinXmusic.config import ARQ_API_KEY
 from CoffinXmusic.config import BOT_NAME as bn
 from CoffinXmusic.config import DURATION_LIMIT
-from CoffinXmusic.config import UPDATES_CHANNEL as updateschannel
+from CoffinXmusic.config import UPDATES_CHANNEL as updateschannel 
+from CoffinXmusic.config import PLAYLIST_PIC as yt_listpic
 from CoffinXmusic.config import que
 from CoffinXmusic.function.admins import admins as a
 from CoffinXmusic.helpers.admins import get_administrators
@@ -643,7 +644,7 @@ async def play(_, message: Message):
                     [InlineKeyboardButton(text="❌", callback_data="cls")],
                 ]
             )       
-            await lel.edit(toxxt,reply_markup=koyboard,disable_web_page_preview=True)
+            await lel.edit(yt_listpic, toxxt,reply_markup=koyboard,disable_web_page_preview=True)
             # WHY PEOPLE ALWAYS LOVE PORN ?? (A point to think)
             return
             # Returning to pornhub

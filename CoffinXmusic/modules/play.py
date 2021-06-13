@@ -644,7 +644,7 @@ async def play(_, message: Message):
                     [InlineKeyboardButton(text="❌", callback_data="cls")],
                 ]
             )       
-            await lel.edit(yt_listpic, toxxt,reply_markup=koyboard,disable_web_page_preview=True)
+            await message.reply_photo(photo=yt_listpic, toxxt,reply_markup=koyboard,disable_web_page_preview=True)
             # WHY PEOPLE ALWAYS LOVE PORN ?? (A point to think)
             return
             # Returning to pornhub

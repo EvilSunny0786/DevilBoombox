@@ -118,7 +118,7 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
     Image.alpha_composite(image5, image6).save("temp.png")
     img = Image.open("temp.png")
     draw = ImageDraw.Draw(img)
-    perufont = ImageFont.truetype("thumbnail/KronaOne-Regular.ttf", 48)
+    perufont = ImageFont.truetype("thumbnail/coffinofficial.otf", 48)
     opfont = ImageFont.truetype("thumbnail/KronaOne-Regular.ttf", 52)
     draw.text((10, 580), f"Now Playing", fill="white", font=perufont)
     draw.text((10, 640), f"{title}", fill="white", font=opfont)

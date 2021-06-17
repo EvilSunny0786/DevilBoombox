@@ -121,7 +121,11 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
     perufont = ImageFont.truetype("thumbnail/coffinofficial.otf", 48)
     opfont = ImageFont.truetype("thumbnail/KronaOne-Regular.ttf", 52)
     draw.text((10, 580), f"Now Playing", fill="white", font=perufont)
-    draw.text((10, 640), f"{title}", fill="white", font=opfont)
+    draw.text(
+        (10, 640),
+        f"{title}, fill="white",
+        font=opfont,
+    )
     img.save("final.png")
     os.remove("temp.png")
     os.remove("background.png")

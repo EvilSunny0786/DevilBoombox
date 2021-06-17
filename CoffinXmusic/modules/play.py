@@ -129,6 +129,7 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
 
 
 @Client.on_message(filters.command("playlist") & filters.group & ~filters.edited)
+@authorized_users_only
 async def playlist(client, message):
     global que
     if message.chat.id in DISABLED_GROUPS:
@@ -197,6 +198,7 @@ def r_ply(type_):
 
 
 @Client.on_message(filters.command("current") & filters.group & ~filters.edited)
+@authorized_users_only
 async def ee(client, message):
     if message.chat.id in DISABLED_GROUPS:
         return
@@ -274,6 +276,7 @@ async def hfmm(_, message):
         
 
 @Client.on_callback_query(filters.regex(pattern=r"^(playlist)$"))
+@authorized_users_only
 async def p_cb(b, cb):
     global que
     que.get(cb.message.chat.id)
@@ -447,6 +450,7 @@ async def m_cb(b, cb):
 
 
 @Client.on_message(command(['play', 'play@CoffinXmusic_bot']) & other_filters)
+@authorized_users_only
 async def play(_, message: Message):
     global que
     global useer
@@ -728,6 +732,7 @@ async def play(_, message: Message):
 
 
 @Client.on_message(filters.command("ytplay") & filters.group & ~filters.edited)
+@authorized_users_only
 async def ytplay(_, message: Message):
     global que
     if message.chat.id in DISABLED_GROUPS:
@@ -879,6 +884,7 @@ async def ytplay(_, message: Message):
         return await lel.delete()
     
 @Client.on_message(filters.command("dplay") & filters.group & ~filters.edited)
+@authorized_users_only
 async def deezer(client: Client, message_: Message):
     if message_.chat.id in DISABLED_GROUPS:
         return
@@ -1017,6 +1023,7 @@ async def deezer(client: Client, message_: Message):
 
 
 @Client.on_message(filters.command("splay") & filters.group & ~filters.edited)
+@authorized_users_only
 async def jiosaavn(client: Client, message_: Message):
     global que
     if message_.chat.id in DISABLED_GROUPS:
@@ -1160,6 +1167,7 @@ async def jiosaavn(client: Client, message_: Message):
 
 
 @Client.on_callback_query(filters.regex(pattern=r"plll"))
+@authorized_users_only
 async def lol_cb(b, cb):
     global que
 

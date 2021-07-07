@@ -1,45 +1,109 @@
-from pyrogram import Client as shashank
-from pyrogram import filters
+import logging
+from CoffinXmusic.modules.msg import Messages as tr
+from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
+from CoffinXmusic.config import SOURCE_CODE,ASSISTANT_NAME,PROJECT_NAME,SUPPORT_GROUP,UPDATES_CHANNEL,BOT_USERNAME
+logging.basicConfig(level=logging.INFO)
 
-
-@shashank.on_message(
-    filters.command("start")
-    & filters.private
-    & ~ filters.edited
-)
-async def shashank_(client: Client, message: Message):
-    await message.reply_sticker("CAACAgEAAxkBAAEJ2GxgnAvflL04PN0B-qpRBbk6trc--AAC3AAD227gRIFzzr3VR17HHwQ")
-    await message.reply_text(                               
-        f"""<b>Hoi {message.from_user.mention} !!
-I'm <b>EX<b> PLAYER!
-Here to play music for you in your voice chat
-I'can here music in voice chat with me without any lag!!
-click the below buttons to know more about me:
-</b>"""
+@Client.on_message(filters.private & filters.incoming & filters.command(['start']))
+def _start(client, message):
+    client.send_message(message.chat.id,
+        text=tr.START_MSG.format(message.from_user.first_name, message.from_user.id),
+        parse_mode="markdown",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "EX support 🚑", callback_data="Sumport")],
-                    InlineKeyboardButton(
-                        "EX updates 📲", callback_data="suupport")]
+                        "➕ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ 🙋‍♀️", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")],
                 [
                     InlineKeyboardButton(
-                        "🆘 Help", url=f"sshelp")
+                        "❤️ Aʙᴏᴜᴛ Mᴇ", url=f"https://t.me/{UPDATES_CHANNEL}"), 
+                    InlineKeyboardButton(
+                        "Sᴜᴘᴘᴏʀᴛ 💬", url=f"https://t.me/{SUPPORT_GROUP}")
                 ],[
                     InlineKeyboardButton(
-                        "About EX" data="aboute*)]]
-                    InlineKeyboardButton(
-                        "Take me to your group", url=f"https://{SOURCE_CODE}")
+                        "🔥 Mʏ Oᴡɴᴇʀ 🔥", url=f"https://t.me/EvilSunny")
                 ]
             ]
         ),
-      
-      
-      
-@app.on_callback_query(filters.regex("Sumport"))
-async def stats_callbacc(_, CallbackQuery):
-    text = "i dont have any Support chat"
-    await app.answer_callback_query(
-        CallbackQuery.id, text, show_alert=True
+        reply_to_message_id=message.message_id
+        )
+
+@Client.on_message(filters.command("start") & ~filters.private & ~filters.channel)
+async def gstart(_, message: Message):
+    await message.reply_text(
+        f"""**🔴 {PROJECT_NAME} is online**""",
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "Sᴜᴘᴘᴏʀᴛ Cʜᴀᴛ 💬", url=f"https://t.me/{SUPPORT_GROUP}"
+                    )
+                ]
+            ]
+        ),
     )
+
+
+@Client.on_message(filters.private & filters.incoming & filters.command(['help']))
+def _help(client, message):
+    client.send_message(chat_id = message.chat.id,
+        text = tr.HELP_MSG[1],
+        parse_mode="markdown",
+        disable_web_page_preview=True,
+        disable_notification=True,
+        reply_markup = InlineKeyboardMarkup(map(1)),
+        reply_to_message_id = message.message_id
+    )
+
+help_callback_filter = filters.create(lambda _, __, query: query.data.startswith('help+'))
+
+@Client.on_callback_query(help_callback_filter)
+def help_answer(client, callback_query):
+    chat_id = callback_query.from_user.id
+    disable_web_page_preview=True
+    message_id = callback_query.message.message_id
+    msg = int(callback_query.data.split('+')[1])
+    client.edit_message_text(chat_id=chat_id,    message_id=message_id,
+        text=tr.HELP_MSG[msg],    reply_markup=InlineKeyboardMarkup(map(msg))
+    )
+
+
+def map(pos):
+    if(pos==1):
+        button = [
+            [InlineKeyboardButton(text = '▶️', callback_data = "help+2")]
+        ]
+    elif(pos==len(tr.HELP_MSG)-1):
+        url = f"https://t.me/{SUPPORT_GROUP}"
+        button = [
+            [InlineKeyboardButton("➕ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ 🙋‍♀️", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")],
+            [InlineKeyboardButton(text = '❤️ Aʙᴏᴜᴛ Mᴇ', url=f"https://t.me/{UPDATES_CHANNEL}"),
+             InlineKeyboardButton(text = 'Sᴜᴘᴘᴏʀᴛ 💬', url=f"https://t.me/{SUPPORT_GROUP}")],
+            [InlineKeyboardButton(text = '🔥 Mʏ Oᴡɴᴇʀ 🔥', url=f"https://t.me/FallenAngel_xD")],
+            [InlineKeyboardButton(text = '◀️', callback_data = f"help+{pos-1}")]
+        ]
+    else:
+        button = [
+            [
+                InlineKeyboardButton(text = '◀️', callback_data = f"help+{pos-1}"),
+                InlineKeyboardButton(text = '▶️', callback_data = f"help+{pos+1}")
+            ],
+        ]
+    return button
+
+@Client.on_message(filters.command("help") & ~filters.private & ~filters.channel)
+async def ghelp(_, message: Message):
+    await message.reply_text(
+        f"""**🙋‍♀️ Hello there! I can play music in the voice chats of telegram groups & channels.**""",
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "🟡 Click here for help 🟡", url=f"https://t.me/{BOT_USERNAME}?start"
+                    )
+                ]
+            ]
+        ),
+    )
+
